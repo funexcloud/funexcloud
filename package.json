@@ -4,14 +4,27 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:stop": "node scripts/stop-next-dev.mjs",
+    "dev:clean": "node scripts/stop-next-dev.mjs && rm -rf .next && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.86.0",
+    "framer-motion": "^12.38.0",
+    "graphology": "^0.26.0",
+    "graphology-layout-forceatlas2": "^0.10.1",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.555.0",
     "next": "16.2.5",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-force-graph-2d": "^1.29.1",
+    "react-markdown": "^10.1.0",
+    "recharts": "^3.5.0",
+    "remark-gfm": "^4.0.1",
+    "sigma": "^3.0.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

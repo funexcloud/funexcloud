@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Funex Cloud Landing
+
+Next.js 16 App Router 기반의 Funex Cloud Phase 1 구현입니다. 마케팅 랜딩, 지도사 가입/로그인, 입점 포트폴리오 업로드, RPC 기반 활동 요약 대시보드를 포함합니다.
 
 ## Getting Started
 
-First, run the development server:
+이 프로젝트는 `package-lock.json`을 사용하는 npm 프로젝트입니다.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`.env.example`을 `.env.local`로 복사하고 Supabase 값을 채웁니다.
 
-## Learn More
+```bash
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Supabase
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`supabase/migrations/202606050001_phase1_funexcloud.sql`에는 다음이 포함됩니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `profiles`, `portfolios`, `service_records`, `reviews`, `withdrawal_blacklist`
+- 모든 테이블 RLS 정책
+- `portfolios` Storage bucket 정책
+- `check_is_blacklisted`, `get_activity_summary`, `on_withdrawal` RPC
 
-## Deploy on Vercel
+로컬 Supabase를 사용한다면 migration 적용 후 `supabase/seed.sql`의 UUID를 실제 `auth.users.id`로 바꿔 seed를 실행하세요.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run dev
+npm run build
+npm run lint
+```
+
+## Phase Notes
+
+결제/PG, 소비자 리포트 결제, 수수료 정산, 관리자 승인 대시보드는 Phase 2~3 범위로 남겨두었습니다.

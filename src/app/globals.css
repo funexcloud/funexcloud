@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050505;
+  --foreground: #e2e8f0;
+  --primary: #3182F6;
+  --space-black: #050505;
+  --muted-white: #ffffff;
+  --tv-gradient: linear-gradient(75deg, #00bce6, #2962ff 50.31%, #d500f9);
+  --tv-blue: #2962ff;
 }
 
 @theme inline {
@@ -10,17 +15,533 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --animate-shine: shine var(--duration, 14s) infinite linear;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes shine {
+  0% {
+    background-position: 0% 0%;
   }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.animate-shine {
+  animation: shine var(--duration, 14s) infinite linear;
+}
+
+.shine-card .shine-border {
+  transition: opacity 0.25s ease;
+}
+
+.shine-card:hover .shine-border,
+.group:hover .shine-border {
+  opacity: 1 !important;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+.marketing-shell {
+  --background: #090807;
+  --foreground: #f8fafc;
+  --primary: #3182F6;
+  --muted: #a1a1aa;
+  --surface: #11100f;
+  --surface-2: #181716;
+  --border: rgba(255, 255, 255, 0.12);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.app-shell {
+  --background: #fafafa;
+  --foreground: #18181b;
+  --primary: #3182F6;
+  --muted: #71717a;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --border: #e4e4e7;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.marketing-shell ::selection,
+.app-shell ::selection {
+  background: color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060d1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a3a5c;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* TradingView-style typography & accents */
+.text-tv-gradient {
+  background-image: var(--tv-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow-tv {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  background-image: var(--tv-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.site-header {
+  z-index: 100;
+  pointer-events: auto;
+  background: linear-gradient(to bottom, rgba(5, 5, 5, 0.88), rgba(5, 5, 5, 0.35) 70%, transparent);
+}
+
+.brand-mark {
+  background-image: var(--tv-gradient);
+}
+
+.cta__button.slash-button {
+  height: 48px;
+  min-height: 48px;
+}
+
+.cta__button.slash-button .slash-button__content {
+  height: 48px;
+  padding: 0 26px 0 18px;
+}
+
+.cta__button.slash-button .slash-button__label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* —— Space hero stage —— */
+.space-hero {
+  /* 16:9 파일럿 — 지구 대기권선(오로라 접합) */
+  --horizon-y: 52%;
+  --blend-h: 8%;
+  background: #050505;
+}
+
+.space-hero__sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(12, 28, 58, 0.45), transparent 55%),
+    radial-gradient(1px 1px at 18% 24%, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1px 1px at 72% 18%, rgba(255, 255, 255, 0.25), transparent),
+    radial-gradient(1.5px 1.5px at 44% 62%, rgba(255, 255, 255, 0.2), transparent),
+    #050505;
+}
+
+/* 파일럿 16:9 (z-3) — 호라이즌 밴드만 오로라와 블렌드 */
+.space-hero__pilot-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.space-hero__pilot {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  transform: translateZ(0);
+  /* 상단 텍스트 + 호라이즌 페이드(최소 알파 0.28 — 깨짐/끊김 완화) */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 11%,
+    #000 22%,
+    #000 calc(var(--horizon-y) - var(--blend-h)),
+    rgba(0, 0, 0, 0.5) calc(var(--horizon-y) - calc(var(--blend-h) * 0.4)),
+    rgba(0, 0, 0, 0.28) var(--horizon-y),
+    rgba(0, 0, 0, 0.5) calc(var(--horizon-y) + calc(var(--blend-h) * 0.4)),
+    #000 calc(var(--horizon-y) + var(--blend-h)),
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 11%,
+    #000 22%,
+    #000 calc(var(--horizon-y) - var(--blend-h)),
+    rgba(0, 0, 0, 0.5) calc(var(--horizon-y) - calc(var(--blend-h) * 0.4)),
+    rgba(0, 0, 0, 0.28) var(--horizon-y),
+    rgba(0, 0, 0, 0.5) calc(var(--horizon-y) + calc(var(--blend-h) * 0.4)),
+    #000 calc(var(--horizon-y) + var(--blend-h)),
+    #000 100%
+  );
+}
+
+.space-hero__pilot-img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 50% 76%;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* 파일럿↔오로라 접합선만 오로라색 블러 */
+.space-hero__blend {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--horizon-y) - calc(var(--blend-h) * 0.85));
+  z-index: 1;
+  height: calc(var(--blend-h) * 2.2);
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 85% 120% at 50% 55%, rgba(0, 188, 230, 0.55), transparent 72%),
+    radial-gradient(ellipse 70% 100% at 35% 60%, rgba(41, 98, 255, 0.45), transparent 70%),
+    radial-gradient(ellipse 70% 100% at 65% 60%, rgba(213, 0, 249, 0.22), transparent 70%);
+  filter: blur(28px);
+  mix-blend-mode: screen;
+  opacity: 0.92;
+}
+
+/* 오로라 — 호라이즌 밴드(z-2), 위·아래만 페이드(접합부는 blend와 맞춤) */
+.hero-aurora-composite {
+  z-index: 2;
+  top: calc(var(--horizon-y) - 22%);
+  right: 0;
+  bottom: auto;
+  left: 0;
+  height: min(40vh, 420px);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 14%,
+    #000 32%,
+    #000 68%,
+    rgba(0, 0, 0, 0.35) 86%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 14%,
+    #000 32%,
+    #000 68%,
+    rgba(0, 0, 0, 0.35) 86%,
+    transparent 100%
+  );
+}
+
+.hero-aurora__frame {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  top: auto;
+  width: min(2400px, 190vw);
+  height: 125%;
+  max-width: none;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.hero-aurora__layer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 100%;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.hero-aurora__layer--rain {
+  opacity: 0.78;
+  mix-blend-mode: screen;
+  filter: saturate(1.25) brightness(1.08);
+}
+
+.hero-aurora__layer--drift {
+  opacity: 0.52;
+  mix-blend-mode: screen;
+  filter: saturate(1.4);
+  animation: auroraDrift 13s ease-in-out infinite alternate;
+}
+
+.hero-aurora__glow {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0.9;
+  background:
+    radial-gradient(ellipse 95% 60% at 38% 94%, rgba(0, 188, 230, 0.32), transparent 62%),
+    radial-gradient(ellipse 80% 50% at 62% 90%, rgba(41, 98, 255, 0.38), transparent 58%),
+    radial-gradient(ellipse 55% 40% at 50% 78%, rgba(213, 0, 249, 0.18), transparent 55%);
+  animation: auroraPulse 9s ease-in-out infinite alternate;
+}
+
+.hero-aurora__veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(5, 5, 5, 0.08) 65%,
+    rgba(5, 5, 5, 0.65) 100%
+  );
+}
+
+.space-hero__content {
+  position: relative;
+  z-index: 20;
+  width: min(100%, 820px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+@keyframes auroraPulse {
+  from {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+/* 오로라: 섹션 전환용 (ConsoleMockup 등) */
+@keyframes auroraDrift {
+  from {
+    transform: translate3d(-1.5%, 0, 0) scale(1.01);
+  }
+  to {
+    transform: translate3d(1.5%, -1.2%, 0) scale(1.03);
+  }
+}
+
+.section-aurora__img {
+  animation: auroraDrift 11s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora__layer--drift,
+  .hero-aurora__glow,
+  .section-aurora__img {
+    animation: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .space-hero {
+    --horizon-y: 50%;
+    --blend-h: 9%;
+    align-items: center;
+    padding-top: 4.5rem;
+  }
+
+  .space-hero__pilot-img {
+    object-position: 50% 80%;
+  }
+
+  .hero-aurora-composite {
+    top: calc(var(--horizon-y) - 20%);
+    height: min(36vh, 340px);
+  }
+
+  .space-hero__blend {
+    filter: blur(24px);
+  }
+
+  .hero-aurora__frame {
+    width: 220vw;
+    height: 115%;
+  }
+
+  .space-hero__content {
+    width: min(100%, 620px);
+    padding-inline: 1.5rem;
+  }
+}
+
+.slash-button {
+  position: relative;
+  display: inline-flex;
+  height: 40px;
+  min-height: 40px;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  overflow: visible;
+  text-decoration: none;
+  transition: filter 160ms ease, transform 160ms ease;
+}
+
+.slash-button:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.slash-button__content {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22.6px 0 16px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.slash-button__content::after {
+  content: "";
+  position: absolute;
+  inset: 0 1px 0 0;
+  z-index: -1;
+  border-radius: 0 11.5px 4.5px 0;
+  transform: skewX(-22deg) translateX(-6px);
+  transform-origin: right center;
+}
+
+.slash-button__label {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.slash-button--gradient .slash-button__content::after {
+  background-image: linear-gradient(75deg, #00bce6, #2962ff 50.31%, #d500f9);
+}
+
+.slash-button--space {
+  color: #0f0f0f;
+}
+
+.slash-button--space .slash-button__content::after {
+  background: #fff;
+}
+
+.mission-link {
+  display: inline-flex;
+  height: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  backdrop-filter: blur(18px);
+  text-decoration: none;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.mission-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.hero-mission-card {
+  right: clamp(16px, 6vw, 86px);
+  bottom: clamp(34px, 7vh, 78px);
+}
+
+@media (max-width: 1023px) {
+  .hero-mission-card {
+    right: auto;
+    left: 50%;
+    bottom: 5.5rem;
+    transform: translateX(-50%);
+  }
+
+  .space-hero__content {
+    padding-bottom: 7.5rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-mission-card {
+    left: 50%;
+    right: auto;
+    bottom: 4.75rem;
+    width: min(100% - 2rem, 360px);
+    transform: translateX(-50%);
+  }
+
+  .space-hero__content {
+    padding-bottom: 8.5rem;
+  }
+
+  .mission-link {
+    width: 46px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .mission-link span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
 }
