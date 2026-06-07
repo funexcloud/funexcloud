@@ -2,8 +2,10 @@
 
 **부고 커뮤니케이션 플랫폼** — 부고 URL 불러오기부터 연락처 검증, 결제, 문자·알림톡 발송, 안심 링크, 부의금 명단까지 한 흐름으로 연결합니다.
 
-운영: [https://ping.funexcloud.com](https://ping.funexcloud.com)  
-저장소: [github.com/funexcloud/ping](https://github.com/funexcloud/ping)
+운영(공개 서비스): [https://ping.funexcloud.com](https://ping.funexcloud.com)  
+소스: [github.com/funexcloud/ping](https://github.com/funexcloud/ping)
+
+> **서비스 vs 저장소:** 위 URL은 **누구나 접속하는 공개 웹 서비스**입니다. GitHub 저장소의 Public/Private 여부는 **코드 공개 범위**이며, 서비스 배포와는 별개입니다.
 
 ---
 
@@ -196,6 +198,7 @@ ping/
 | [`docs/CODING-STANDARD.md`](docs/CODING-STANDARD.md) | 코딩 규칙 |
 | [`docs/deployment-playbook.md`](docs/deployment-playbook.md) | PG·Firebase·도메인 총괄 |
 | [`docs/react-integration/`](docs/react-integration/) | HTML→React 이관·API 인벤토리 |
+| [`docs/legal-attorney-review-checklist.md`](docs/legal-attorney-review-checklist.md) | **변호사 검토 체크리스트** (약관·개인정보·IP) |
 | [`.cursor/rules/ping-bordered-panel.mdc`](.cursor/rules/ping-bordered-panel.mdc) | 패널 UI 규칙 |
 
 ---
@@ -209,6 +212,28 @@ ping/
 
 ---
 
-## 라이선스
+## 라이선스·사업자 정보
 
-Private repository — Funexcloud 내부 프로젝트. 무단 배포·재배포 금지.
+**운영 주체:** 한국AIBC융합원 (대표 송지훈)
+
+| 항목 | 내용 |
+|------|------|
+| 사업자등록번호 | 225-09-26000 |
+| 통신판매업신고번호 | 2024울산북구0108호 |
+| 사업장주소 | 울산광역시 중구 해오름5길 24 101호 |
+| 고객센터 | 052-286-4440 |
+
+한국AIBC융합원에서 운영하는 본 사이트의 모든 유료 서비스는 한국AIBC융합원에서 책임지고 제공합니다.
+
+| 구분 | 정책 |
+|------|------|
+| **웹 서비스 이용** | [이용약관](https://ping.funexcloud.com/legal/terms-of-service) · [개인정보처리방침](https://ping.funexcloud.com/legal/privacy-policy) |
+| **소스 코드** | 독점 — [`LICENSE`](./LICENSE). 무단 복제·배포·2차 저작물 금지 |
+| **npm `"private"`** | npm 패키지 미배포 설정 (GitHub 공개 여부와 별개) |
+
+**변호사 검토(필수):** [`docs/legal-attorney-review-checklist.md`](docs/legal-attorney-review-checklist.md) — 약관·개인정보·지식재산 문구는 **법률 자문 후** 확정합니다.
+
+**GitHub About:** Description → [`.github/repository-description.txt`](.github/repository-description.txt)  
+`GITHUB_TOKEN=... node scripts/set-github-repo-description.mjs`
+
+사업자 표기 단일 출처: [`src/lib/ping-company-legal.ts`](src/lib/ping-company-legal.ts)
