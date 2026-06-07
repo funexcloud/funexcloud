@@ -1,78 +1,243 @@
-# Funex Cloud
+# FUNEX CLOUD
 
-**장례 산업 운영·커뮤니케이션 플랫폼** — 랜딩·지도사 SaaS, AI 상담, Care, 블로그 스튜디오, 묘지·부고·이장, 울산 거점, API까지 `*.funexcloud.com` 아래 제품군으로 제공합니다. 코드는 **서비스·모듈별 저장소**에서 개발·배포합니다.
+> **서비스 저장소 README** — 조직 전체 소개·다른 제품(PING 등) 링크는 [GitHub 조직 프로필](https://github.com/funexcloud) (`funexcloud/.github/profile/README.md`)을 보세요. 등록 방법: [`docs/github-readme-setup.md`](docs/github-readme-setup.md)
 
-운영 포털: [https://funexcloud.com](https://funexcloud.com)  
-조직: [github.com/funexcloud](https://github.com/funexcloud)
+**장례 SaaS 랜딩·온보딩 플랫폼** — 마케팅 랜딩, CEO 인사이트, 장례지도사 가입·심사, 포트폴리오 업로드, 활동 대시보드, 소비자 리포트 결제까지 한 저장소에서 연결합니다.
 
-> **이 README는 GitHub 조직 프로필용**입니다. 제품별 설치·API·배포·환경 변수는 **각 서비스 저장소 README**를 보세요.
+운영(공개 서비스): [https://funexcloud.com](https://funexcloud.com)  
+CEO 인사이트: [https://ceo.funexcloud.com](https://ceo.funexcloud.com)  
+소스: [github.com/funexcloud/funexcloud](https://github.com/funexcloud/funexcloud)  
+관련 서비스: [PING (ping.funexcloud.com)](https://github.com/funexcloud/ping)
 
----
-
-## 플랫폼 허브
-
-| 제품 | 공개 URL | 설명 | 저장소 |
-|------|----------|------|--------|
-| **Funex Cloud** | [funexcloud.com](https://funexcloud.com) | 우주 장례 브랜드 랜딩, 지도사 온보딩·심사, 소비자 리포트, Orbit Engine 소개 | [funexcloud/funexcloud](https://github.com/funexcloud/funexcloud) |
-| **CEO Insight** | [ceo.funexcloud.com](https://ceo.funexcloud.com) | 창업자 백서·관점·지식 그래프 (`funexcloud` 호스트 rewrite) | [funexcloud/funexcloud](https://github.com/funexcloud/funexcloud) |
+> **서비스 vs 저장소:** 위 URL은 **누구나 접속하는 공개 웹 서비스**입니다. GitHub 저장소의 Public/Private 여부는 **코드 공개 범위**이며, 서비스 배포와는 별개입니다.
 
 ---
 
-## 서비스 라인업
+## Funex Cloud가 하는 일
 
-| 서비스 | 공개 URL | 한 줄 설명 | 저장소·비고 |
-|--------|----------|------------|-------------|
-| **AX Contact Center** | [ax.funexcloud.com](https://ax.funexcloud.com) | AI 기반 장례 상담·콜센터, 문의 분류·응대 자동화 | 별도 배포 · 상세 README 각 repo |
-| **Funex Care** | [care.funexcloud.com](https://care.funexcloud.com) | 상담 기록·직원 인계·배차·유족 안내를 하나의 Care 운영 흐름으로 연결 | 별도 배포 |
-| **Blog Studio (AI)** | [blog.funexcloud.com](https://blog.funexcloud.com) | AI 블로그·템플릿 사이트 생성, SEO·Notion 연동 | 별도 배포 (`inblog_funex` 계열) |
-| **아카이브** | [funexcloud.com#archive](https://funexcloud.com#archive) | 상장례·의례 지식 백서·기록 아카이브 (랜딩 내 섹션) | [funexcloud/funexcloud](https://github.com/funexcloud/funexcloud) |
-| **GRID 묘지관리** | [funexcloud.com#features](https://funexcloud.com#features) | 묘지·GPS·현장 관리, Orbit Anchor·Sync 연동 SaaS 모듈 | 플랫폼 모듈 · 전용 repo 협의 |
-| **Ping 부고발송** | [ping.funexcloud.com](https://ping.funexcloud.com) | 부고 URL·연락처 검증·결제·알림톡/SMS 대량 발송·안심 링크 | [funexcloud/ping](https://github.com/funexcloud/ping) |
-| **Move 이장관리** | [move.funexcloud.com](https://move.funexcloud.com) | 이장·견적·묘지 연계 SaaS, e하늘 등 데이터 정규화 | `funex_grid_send` (별도 Vercel 프로젝트) |
-| **Ulsan 거점서비스** | [funexcloud.com#features](https://funexcloud.com#features) | 울산 지역 기반 장례 디지털 전환·파트너 연동 거점 (전국 확장 로드맵) | 플랫폼·지역 연동 |
-| **API 연동** | [docs.funexcloud.com](https://docs.funexcloud.com) | GRID·Ping·Move·Care·Mainnet 앵커 등 모듈 API·연동 가이드 | 문서 허브 · Enterprise 플랜 |
+일반 랜딩 페이지와 달리, 본 저장소는 **장례 지도사 온보딩·운영 SaaS Phase 1~2**를 Next.js 단일 앱으로 제공합니다.
+
+| 영역 | 내용 |
+|------|------|
+| **마케팅** | 우주 장례 브랜드 랜딩, 철학·메인넷·제품 섹션, 이용약관·개인정보 |
+| **CEO 인사이트** | `/ceo` 백서·관점·지식 그래프 (`ceo.funexcloud.com` 호스트 rewrite) |
+| **지도사 온보딩** | 회원가입·로그인, 사업자번호 검증(NTS), SMS OTP(Solapi), 포트폴리오 업로드 |
+| **심사·운영** | 관리자 승인/반려 RPC, 대시보드·콘솔, 활동 요약 위젯 |
+| **소비자 리포트** | 리포트 조회·결제(토스 콜백), 탐색·프로필 공개 페이지 (Phase 2) |
+| **인프라** | Supabase Auth·Postgres·Storage·Edge Functions, Vercel `icn1` 배포 |
 
 ---
 
-## 모듈이 한 줄로 이어지는 방식
+## 기술 스택
+
+| 계층 | 기술 |
+|------|------|
+| **UI** | Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4 |
+| **애니메이션·시각화** | Framer Motion, Recharts, Sigma / react-force-graph-2d |
+| **데이터** | Supabase Postgres + RLS, Supabase Storage |
+| **인증** | Supabase Auth, 미들웨어 보호 라우트 (`/onboarding`, `/console`, `/dashboard`) |
+| **검증 API** | Supabase Edge Functions + Next Route Handler (`verify-biz-number`, `send-otp`, `verify-otp`) |
+| **결제** | 토스페이먼츠 콜백 (`/api/payment/toss/callback`) |
+| **배포** | Vercel (`vercel.json` → `icn1`) |
+
+---
+
+## 아키텍처 (요약)
 
 ```
-[Funex Cloud 랜딩·온보딩]
-        │
-        ├── AX / Care / Blog Studio  ← 운영·콘텐츠·상담 축
-        ├── GRID · Ping · Move       ← 현장·발송·이장 축
-        ├── 아카이브 · CEO Insight   ← 지식·브랜드 축
-        ├── Ulsan 거점               ← 지역 확장 축
-        └── API · Mainnet 앵커       ← 연동·증명 축
+[브라우저]
+    │
+    ▼
+Vercel — Next.js (src/app)          ← 마케팅 UI · 앱 UI · Route Handler
+    │
+    ├── Supabase Auth / Postgres / Storage
+    ├── Edge Functions (OTP · 사업자 검증)
+    └── 외부 API (Solapi · NTS · Toss)
 ```
 
-Orbit Engine(궤도 엔진)이 위 모듈 이벤트를 파이프라인으로 묶고, 필요 시 Polygon에 앵커합니다.
+- **호스트 분기:** `ceo.funexcloud.com` → `next.config.ts` rewrite로 `/ceo` 트리 서빙
+- **보호 라우트:** `src/middleware.ts`에서 Supabase 세션 쿠키 검사
+- **사업자 표기:** README·푸터·약관은 `src/lib/funex-company-legal.ts` 단일 출처
 
 ---
 
-## README 역할 분담
+## 시작하기
 
-| 위치 | 파일 | 용도 |
-|------|------|------|
-| **조직 프로필** | `funexcloud/.github` → `profile/README.md` | **전체 제품 지도**(이 문서) + 공통 사업자 정보 |
-| **서비스 저장소** | 각 repo 루트 `README.md` | 해당 제품만의 기술·시작하기·배포·env (PING 형식) |
+### 요구 사항
 
-공통 섹션 규칙: [`funexcloud/funexcloud` → `docs/README-template.md`](https://github.com/funexcloud/funexcloud/blob/master/docs/README-template.md)  
-등록 방법: [`funexcloud/funexcloud` → `docs/github-readme-setup.md`](https://github.com/funexcloud/funexcloud/blob/master/docs/github-readme-setup.md)
+- **Node.js 20** (권장)
+- npm
+
+### 설치
+
+```bash
+git clone https://github.com/funexcloud/funexcloud.git
+cd funexcloud
+npm install
+cp .env.example .env.local
+# .env.local 값을 채운 뒤 아래 dev 실행
+```
+
+### 로컬 개발
+
+```bash
+npm run dev
+
+# Turbopack 캐시·포트 충돌 시
+npm run dev:clean
+```
+
+| URL | 용도 |
+|-----|------|
+| `http://localhost:3000` | 메인 랜딩 |
+| `http://localhost:3000/ceo` | CEO 인사이트 |
+| `http://localhost:3000/login` · `/signup` · `/onboarding` | 지도사 인증·입점 |
+| `http://localhost:3000/dashboard` · `/console` | 앱 콘솔 |
+| `http://localhost:3000/explore` · `/report/[id]` | 소비자 탐색·리포트 |
+
+### 검증
+
+```bash
+npm run lint
+npm run build
+```
 
 ---
 
-## 공통 원칙
+## 환경 변수
 
-- **서비스 URL** = 누구나 접속하는 공개 웹
-- **GitHub Public/Private** = 코드 공개 범위 (배포와 별개)
-- **사업자 표기** = 각 서비스 repo의 `*-company-legal.ts` 단일 출처 → README·푸터와 동기화
+`.env.example`에 전체 목록이 있습니다. **`.env` / `.env.local`은 git에 올리지 마세요.**
+
+| 구분 | 대표 변수 |
+|------|-----------|
+| **Supabase** | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` |
+| **Solapi OTP** | `SOLAPI_API_KEY`, `SOLAPI_API_SECRET`, `SOLAPI_FROM`, `OTP_PEPPER` |
+| **사업자 검증** | `NTS_API_KEY`, `NTS_STATUS_ENDPOINT` |
+| **결제·입금** | `NEXT_PUBLIC_BANK_*`, 토스 관련 키 (Phase 2) |
+| **사이트** | `NEXT_PUBLIC_SITE_URL` |
+
+Edge Functions Secrets는 Supabase 대시보드 또는 `supabase secrets set`으로 별도 주입합니다.
 
 ---
 
-## 사업자 정보 (공통)
+## npm scripts (자주 쓰는 것)
 
-**운영 주체:** 주식회사 동반 (대표이사 송지훈)
+| 명령 | 설명 |
+|------|------|
+| `npm run dev` | Next.js 개발 서버 (Turbopack) |
+| `npm run dev:stop` | 로컬 dev 서버(3000~3005) 종료 |
+| `npm run dev:clean` | dev 종료 → `.next` 삭제 → 재시작 |
+| `npm run build` | 프로덕션 빌드 |
+| `npm run start` | 프로덕션 서버 |
+| `npm run lint` | ESLint |
+
+---
+
+## 디렉터리 구조
+
+```
+funexcloud/
+├── src/app/                    # Next.js App Router (마케팅 · 앱 · API)
+│   ├── (marketing)/            # CEO, 약관, 제품 페이지
+│   ├── (app)/                  # 로그인, 온보딩, 대시보드, 콘솔
+│   ├── api/                    # OTP, 사업자검증, 결제 콜백
+│   ├── explore/ · report/      # 소비자 탐색·리포트
+│   └── admin/                  # 관리자 결제 화면
+├── src/components/             # UI 섹션, 푸터, 앱 위젯
+├── src/lib/                    # 사이트 카피, Supabase, funex-company-legal
+├── src/content/ceo/            # CEO 백서 마크다운
+├── supabase/
+│   ├── migrations/             # Phase 1~2 스키마·RPC
+│   ├── functions/              # Edge Functions
+│   └── seed.sql
+├── docs/                       # 배포·README 템플릿
+├── scripts/                    # dev 정리·DB 점검 스크립트
+├── funex_terms_of_service.md
+├── funexcloud_privacy_policy.md
+└── vercel.json
+```
+
+---
+
+## Supabase
+
+### Migrations
+
+| 파일 | 내용 |
+|------|------|
+| `202606050001_phase1_funexcloud.sql` | `profiles`, `portfolios`, RLS, 기본 RPC |
+| `202606060002_phase1_updates.sql` | 반려 상태, 인증·알림 테이블, 승인/반려 RPC |
+| `20260606192500_phase2_consumer_payment.sql` | 소비자 리포트 결제 |
+
+로컬 Supabase 사용 시 migration 적용 후 `supabase/seed.sql`의 UUID를 실제 `auth.users.id`로 맞춥니다.
+
+### Edge Functions
+
+```bash
+supabase start
+supabase functions serve --env-file .env.local
+
+supabase functions deploy verify-biz-number --project-ref <ref>
+supabase functions deploy send-otp --project-ref <ref>
+supabase functions deploy verify-otp --project-ref <ref>
+```
+
+---
+
+## 관리자
+
+| 경로 | 기능 |
+|------|------|
+| `/admin` | 지도사 심사 (승인/반려) |
+| `/admin/payments` | 결제·입금 확인 (Phase 2) |
+
+실제 권한은 Supabase RLS·RPC 및 서버 측 검증으로 수행합니다.
+
+---
+
+## 배포
+
+| 대상 | 방법 |
+|------|------|
+| **Next UI** | Vercel — `npx vercel deploy --prod` |
+| **루트 도메인** | `funexcloud.com` → 본 프로젝트 Domains 연결 |
+| **CEO 서브도메인** | `ceo.funexcloud.com` — Vercel Domains **수동 추가** + `next.config.ts` rewrite |
+
+상세: [`docs/deploy-funexcloud-com.md`](docs/deploy-funexcloud-com.md)
+
+---
+
+## 문서
+
+| 문서 | 내용 |
+|------|------|
+| [`docs/github-readme-setup.md`](docs/github-readme-setup.md) | 조직 메인 vs 서비스 README 등록 |
+| [`docs/org-profile-README.md`](docs/org-profile-README.md) | 조직 프로필용 README 초안 |
+| [`docs/deploy-funexcloud-com.md`](docs/deploy-funexcloud-com.md) | funexcloud.com · move 서브도메인 배포 |
+| [`docs/README-template.md`](docs/README-template.md) | 서비스 저장소 README 섹션 규칙 |
+| [`funex_terms_of_service.md`](funex_terms_of_service.md) | 이용약관 원문 |
+| [`funexcloud_privacy_policy.md`](funexcloud_privacy_policy.md) | 개인정보처리방침 원문 |
+
+---
+
+## 보안
+
+- 시크릿·API 키는 **환경 변수**만 사용 (클라이언트 번들·git 금지)
+- OTP는 HMAC-SHA256 해시 저장, 상수시간 비교·오입력 제한
+- 관리·심사 API는 서버·RPC에서 권한 검증
+
+---
+
+## Phase Notes
+
+- **실시간 알림:** v1은 30초 주기 클라이언트 폴링 (Realtime은 Phase 3)
+- **수수료·정산:** Phase 3 범위
+
+---
+
+## 라이선스·사업자 정보
+
+**운영 주체:** 주식회사 동반 (대표 송지훈)
 
 | 항목 | 내용 |
 |------|------|
@@ -88,15 +253,7 @@ Orbit Engine(궤도 엔진)이 위 모듈 이벤트를 파이프라인으로 묶
 
 | 구분 | 정책 |
 |------|------|
-| **웹 서비스 이용** | [이용약관](https://funexcloud.com/terms) · [개인정보처리방침](https://funexcloud.com/privacy) |
+| **웹 서비스 이용** | [이용약관](/terms) · [개인정보처리방침](/privacy) |
+| **소스 코드** | `package.json` `"private": true` — npm 패키지 미배포 |
 
----
-
-## 문서
-
-| 문서 | 위치 |
-|------|------|
-| README 등록 가이드 | [funexcloud/funexcloud → `docs/github-readme-setup.md`](https://github.com/funexcloud/funexcloud) |
-| Funex Cloud 배포 | [funexcloud/funexcloud → `docs/deploy-funexcloud-com.md`](https://github.com/funexcloud/funexcloud) |
-| PING 대량 발송 SoT | [funexcloud/ping → `docs/ping-bulk-send-process.md`](https://github.com/funexcloud/ping) |
-| Mainnet·API 설계 | [docs.funexcloud.com/mainnet](https://docs.funexcloud.com/mainnet) |
+**사업자 표기 단일 출처:** [`src/lib/funex-company-legal.ts`](src/lib/funex-company-legal.ts)
