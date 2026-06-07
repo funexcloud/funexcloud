@@ -1,239 +1,102 @@
-# PING
+# Funex Cloud
 
-**부고 커뮤니케이션 플랫폼** — 부고 URL 불러오기부터 연락처 검증, 결제, 문자·알림톡 발송, 안심 링크, 부의금 명단까지 한 흐름으로 연결합니다.
+**장례 산업 운영·커뮤니케이션 플랫폼** — 랜딩·지도사 SaaS, AI 상담, Care, 블로그 스튜디오, 묘지·부고·이장, 울산 거점, API까지 `*.funexcloud.com` 아래 제품군으로 제공합니다. 코드는 **서비스·모듈별 저장소**에서 개발·배포합니다.
 
-운영(공개 서비스): [https://ping.funexcloud.com](https://ping.funexcloud.com)  
-소스: [github.com/funexcloud/ping](https://github.com/funexcloud/ping)
+운영 포털: [https://funexcloud.com](https://funexcloud.com)  
+조직: [github.com/funexcloud](https://github.com/funexcloud)
 
-> **서비스 vs 저장소:** 위 URL은 **누구나 접속하는 공개 웹 서비스**입니다. GitHub 저장소의 Public/Private 여부는 **코드 공개 범위**이며, 서비스 배포와는 별개입니다.
+> **이 README는 GitHub 조직 프로필용**입니다. 제품별 설치·API·배포·환경 변수는 **각 서비스 저장소 README**를 보세요.
 
 ---
 
-## PING이 하는 일
+## 플랫폼 허브
 
-일반 SMS 대행 사이트와 달리, PING은 **부고(장례) 상황에 맞춘 세로(vertical) 플로**를 제공합니다.
+| 제품 | 공개 URL | 설명 | 저장소 |
+|------|----------|------|--------|
+| **Funex Cloud** | [funexcloud.com](https://funexcloud.com) | 우주 장례 브랜드 랜딩, 지도사 온보딩·심사, 소비자 리포트, Orbit Engine 소개 | [funexcloud/funexcloud](https://github.com/funexcloud/funexcloud) |
+| **CEO Insight** | [ceo.funexcloud.com](https://ceo.funexcloud.com) | 창업자 백서·관점·지식 그래프 (`funexcloud` 호스트 rewrite) | [funexcloud/funexcloud](https://github.com/funexcloud/funexcloud) |
 
-| 영역 | 내용 |
+---
+
+## 서비스 라인업
+
+| 서비스 | 공개 URL | 한 줄 설명 | 저장소·비고 |
+|--------|----------|------------|-------------|
+| **AX Contact Center** | [ax.funexcloud.com](https://ax.funexcloud.com) | AI 기반 장례 상담·콜센터, 문의 분류·응대 자동화 | 별도 배포 · 상세 README 각 repo |
+| **Funex Care** | [care.funexcloud.com](https://care.funexcloud.com) | 상담 기록·직원 인계·배차·유족 안내를 하나의 Care 운영 흐름으로 연결 | 별도 배포 |
+| **Blog Studio (AI)** | [blog.funexcloud.com](https://blog.funexcloud.com) | AI 블로그·템플릿 사이트 생성, SEO·Notion 연동 | 별도 배포 (`inblog_funex` 계열) |
+| **아카이브** | [funexcloud.com#archive](https://funexcloud.com#archive) | 상장례·의례 지식 백서·기록 아카이브 (랜딩 내 섹션) | [funexcloud/funexcloud](https://github.com/funexcloud/funexcloud) |
+| **GRID 묘지관리** | [funexcloud.com#features](https://funexcloud.com#features) | 묘지·GPS·현장 관리, Orbit Anchor·Sync 연동 SaaS 모듈 | 플랫폼 모듈 · 전용 repo 협의 |
+| **Ping 부고발송** | [ping.funexcloud.com](https://ping.funexcloud.com) | 부고 URL·연락처 검증·결제·알림톡/SMS 대량 발송·안심 링크 | [funexcloud/ping](https://github.com/funexcloud/ping) |
+| **Move 이장관리** | [move.funexcloud.com](https://move.funexcloud.com) | 이장·견적·묘지 연계 SaaS, e하늘 등 데이터 정규화 | `funex_grid_send` (별도 Vercel 프로젝트) |
+| **Ulsan 거점서비스** | [funexcloud.com#features](https://funexcloud.com#features) | 울산 지역 기반 장례 디지털 전환·파트너 연동 거점 (전국 확장 로드맵) | 플랫폼·지역 연동 |
+| **API 연동** | [docs.funexcloud.com](https://docs.funexcloud.com) | GRID·Ping·Move·Care·Mainnet 앵커 등 모듈 API·연동 가이드 | 문서 허브 · Enterprise 플랜 |
+
+---
+
+## 모듈이 한 줄로 이어지는 방식
+
+```
+[Funex Cloud 랜딩·온보딩]
+        │
+        ├── AX / Care / Blog Studio  ← 운영·콘텐츠·상담 축
+        ├── GRID · Ping · Move       ← 현장·발송·이장 축
+        ├── 아카이브 · CEO Insight   ← 지식·브랜드 축
+        ├── Ulsan 거점               ← 지역 확장 축
+        └── API · Mainnet 앵커       ← 연동·증명 축
+```
+
+Orbit Engine(궤도 엔진)이 위 모듈 이벤트를 파이프라인으로 묶고, 필요 시 Polygon에 앵커합니다.
+
+---
+
+## README 역할 분담
+
+| 위치 | 파일 | 용도 |
+|------|------|------|
+| **조직 프로필** | `funexcloud/.github` → `profile/README.md` | **전체 제품 지도**(이 문서) + 공통 사업자 정보 |
+| **서비스 저장소** | 각 repo 루트 `README.md` | 해당 제품만의 기술·시작하기·배포·env (PING 형식) |
+
+공통 섹션 규칙: [`funexcloud/funexcloud` → `docs/README-template.md`](https://github.com/funexcloud/funexcloud/blob/master/docs/README-template.md)  
+등록 방법: [`funexcloud/funexcloud` → `docs/github-readme-setup.md`](https://github.com/funexcloud/funexcloud/blob/master/docs/github-readme-setup.md)
+
+---
+
+## 공통 원칙
+
+- **서비스 URL** = 누구나 접속하는 공개 웹
+- **GitHub Public/Private** = 코드 공개 범위 (배포와 별개)
+- **사업자 표기** = 각 서비스 repo의 `*-company-legal.ts` 단일 출처 → README·푸터와 동기화
+
+---
+
+## 사업자 정보 (공통)
+
+**운영 주체:** 주식회사 동반 (대표이사 송지훈)
+
+| 항목 | 내용 |
 |------|------|
-| **대량 발송** | 부고 URL 파싱 → 연락처(Google/CSV) → 유효 건수 과금 → 회원/비회원 본인확인 → 토스 결제 → Solapi 발송 |
-| **안심 부고 링크** | 외부 부고 URL을 서명 JWT(`/s/{token}`)로 감싸 위·변조·만료(발인 기준) 관리 |
-| **결제·주문** | Firestore `ping_orders`, 무통장 입금, 환불·재발송 API |
-| **부의금** | 발송 명단 기반 부의금 정리·엑셀 (Prisma + SQLite, 로컬/보조 저장) |
-| **관리자** | 입금 확인·발송 트리거, 모니터링, 서비스 설정 (`/admin/*`) |
+| 사업자등록번호 | 619-87-02012 |
+| 법인등록번호 | 170111-0801549 |
+| 의료기기판매업 | 2024-5050041-00015호 |
+| 통신판매업신고번호 | 2024경북경주0257호 |
+| 사업장주소 | 경상북도 경주시 서면 도계서오길 57-7 |
+| 고객센터 | 1855-4947 |
+| 민원 담당자 | 송지훈 010-4864-2401 |
 
-자세한 9단계 플로는 [`docs/ping-bulk-send-process.md`](docs/ping-bulk-send-process.md)를 참고하세요.
+주식회사 동반에서 운영하는 본 사이트의 모든 유료 서비스는 주식회사 동반에서 책임지고 제공합니다.
 
----
-
-## 기술 스택
-
-| 계층 | 기술 |
+| 구분 | 정책 |
 |------|------|
-| **UI** | Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS |
-| **API (로컬·레거시)** | Express (`server.js`), Firebase Cloud Functions (`index.js`) |
-| **데이터** | Firebase Firestore, Firebase Storage, Prisma + SQLite (부의금·연락처 보조) |
-| **결제** | 토스페이먼츠 (PortOne 브라우저 SDK) |
-| **발송** | Solapi (알림톡 우선, LMS 폴백) — [`ping-dispatch/`](ping-dispatch/) |
-| **인증** | 회원(이메일·카카오), 비회원 Solapi OTP, 관리자 HttpOnly 세션 쿠키 |
-| **배포** | Vercel (Next UI), Firebase (Functions·Hosting API), Cloud Run (Express 폴백) |
-
----
-
-## 아키텍처 (요약)
-
-```
-[브라우저]
-    │
-    ▼
-Vercel — Next.js (src/app)          ← 사용자 UI · 일부 Route Handler
-    │
-    ├── Firebase Functions / Hosting  ← 결제·부고 import·주문 API (PING_BACKEND_API_ORIGIN)
-    ├── Express (Cloud Run)           ← 회원·게스트 인증 폴백 (PING_EXPRESS_ORIGIN)
-    └── Firestore / Storage / Solapi / Toss
-```
-
-- **UI 캐논:** React `src/app`만 (레거시 HTML은 제거·스냅샷 보관)
-- **로컬 개발:** Express `:3000` + Next `:3002` 동시 기동 (`npm run dev`)
-- **역할 분담:** [`docs/react-integration/express-next-role-split.md`](docs/react-integration/express-next-role-split.md)
-- **배포 축:** [`docs/deployment-axis-decision.md`](docs/deployment-axis-decision.md)
-
----
-
-## 시작하기
-
-### 요구 사항
-
-- **Node.js 20** (`package.json` `engines`)
-- npm
-- (선택) Firebase CLI, Vercel CLI, Docker
-
-### 설치
-
-```bash
-git clone https://github.com/funexcloud/ping.git
-cd ping
-npm install
-cp .env.example .env
-# .env 값을 채운 뒤 아래 dev 실행
-```
-
-### 로컬 개발
-
-```bash
-# Express(:3000) + Next(:3002) 동시 실행
-npm run dev
-
-# 포트 충돌 시
-npm run dev:clean
-
-# Docker
-npm run dev:docker
-```
-
-| URL | 용도 |
-|-----|------|
-| `http://localhost:3002` | Next UI (권장 브라우저 진입) |
-| `http://localhost:3000` | Express API · OAuth 콜백 |
-
-주요 화면: `/` · `/intro` · `/start` (대량 위저드) · `/login` · `/checkout` · `/payment-success` · `/admin/monitoring`
-
-### 검증
-
-```bash
-npm run check    # 파서·마이그레이션·env 점검 등
-npm run smoke    # next build + 스모크 테스트
-```
-
----
-
-## 환경 변수
-
-`.env.example`에 전체 목록과 주석이 있습니다. **`.env`는 git에 올리지 마세요.**
-
-| 구분 | 대표 변수 |
-|------|-----------|
-| **공개 사이트** | `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_FIREBASE_*` |
-| **API 베이스** | `PING_BACKEND_API_ORIGIN`, `PING_EXPRESS_ORIGIN` |
-| **안심 링크** | `PING_SAFE_LINK_SECRET` |
-| **관리자** | `PING_ADMIN_UI_PASSWORD`, `PING_ADMIN_API_KEY`, `PING_ADMIN_SESSION_SECRET` |
-| **발송** | `SOLAPI_*`, `PING_DISPATCH_*` |
-| **결제** | `TOSS_PAYMENTS_*`, `PORTONE_*` |
-| **회원·OAuth** | `KAKAO_*`, `FIREBASE_SERVICE_ACCOUNT_JSON`, `PING_OAUTH_STATE_SECRET` |
-| **Google 연락처** | `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_API_KEY` |
-
-운영 체크리스트: [`docs/vercel-production-handoff.md`](docs/vercel-production-handoff.md)
-
----
-
-## npm scripts (자주 쓰는 것)
-
-| 명령 | 설명 |
-|------|------|
-| `npm run dev` | Express + Next 동시 개발 |
-| `npm run dev:clean` | 포트 정리 후 dev |
-| `npm run build` | Next 프로덕션 빌드 |
-| `npm run check` | 저장소 일관성·규칙 검사 |
-| `npm run smoke` | 빌드 + 스모크 |
-| `npm run test:solapi` | Solapi 발송 테스트 |
-| `npm run deploy:express` | Express → Cloud Run |
-| `npm run deploy:functions` | Firebase Functions 배포 |
-| `npm run verify:production` | 프로덕션 API 연결 확인 |
-
----
-
-## 디렉터리 구조
-
-```
-ping/
-├── src/app/              # Next.js App Router (페이지·API Route Handler)
-├── src/components/       # React UI
-├── src/lib/              # 클라이언트·서버 공용 유틸 (안심 링크, 주문 상태 등)
-├── assets/               # CSS·레거시 JS·정적 자산
-├── ping-dispatch/        # Solapi 대량 발송 모듈
-├── lib/                  # CJS 브릿지 (member-auth-app, bugo 파서 등)
-├── scripts/              # 빌드·검증·배포 스크립트
-├── docs/                 # 운영·이관·UI 가이드
-├── server.js             # 로컬 Express (API 프록시·레거시 핸들러)
-├── index.js              # Firebase Cloud Functions 진입점
-├── member-auth.js        # 회원 로그인·세션
-├── ping-admin-auth.js    # 관리자 세션·API 키 검증
-└── prisma/               # SQLite 스키마 (부의금 등)
-```
-
----
-
-## 관리자 (`/admin`)
-
-| 경로 | 기능 |
-|------|------|
-| `/admin/auth` | PIN 로그인 → `httpOnly` 쿠키 `ping_admin_session` (8시간) |
-| `/admin/monitoring` | 주문·파트너 모니터링, 무통장 입금 확인·발송 |
-| `/admin/service-status` | 서비스 현황, 비회원 문자 인증 on/off |
-| `/admin/partner` | 파트너 대시보드 |
-
-- UI PIN: `PING_ADMIN_UI_PASSWORD` (서버 전용)
-- API 자동화: `PING_ADMIN_API_KEY` 또는 로그인 세션 쿠키
-- 실제 권한 검증은 **모든 관리 API**에서 서버 측 `resolveAdminAuth`로 수행
-
----
-
-## 배포
-
-| 대상 | 방법 |
-|------|------|
-| **Next UI** | Vercel — `npx vercel deploy --prod` ([`docs/vercel-deploy.md`](docs/vercel-deploy.md)) |
-| **Functions** | `npm run deploy:functions` |
-| **Express** | `npm run deploy:express` → `PING_EXPRESS_ORIGIN` 설정 |
-
-프로덕션 배포 전·후: [`docs/vercel-production-handoff.md`](docs/vercel-production-handoff.md) §1·§2
+| **웹 서비스 이용** | [이용약관](https://funexcloud.com/terms) · [개인정보처리방침](https://funexcloud.com/privacy) |
 
 ---
 
 ## 문서
 
-| 문서 | 내용 |
+| 문서 | 위치 |
 |------|------|
-| [`docs/ping-bulk-send-process.md`](docs/ping-bulk-send-process.md) | 대량 발송 9단계 (제품 SoT) |
-| [`docs/UI-GUIDE.md`](docs/UI-GUIDE.md) | UI·디자인 토큰 |
-| [`docs/CODING-STANDARD.md`](docs/CODING-STANDARD.md) | 코딩 규칙 |
-| [`docs/deployment-playbook.md`](docs/deployment-playbook.md) | PG·Firebase·도메인 총괄 |
-| [`docs/react-integration/`](docs/react-integration/) | HTML→React 이관·API 인벤토리 |
-| [`docs/legal-attorney-review-checklist.md`](docs/legal-attorney-review-checklist.md) | **변호사 검토 체크리스트** (약관·개인정보·IP) |
-| [`.cursor/rules/ping-bordered-panel.mdc`](.cursor/rules/ping-bordered-panel.mdc) | 패널 UI 규칙 |
-
----
-
-## 보안
-
-- 시크릿·PIN·API 키는 **환경 변수**만 사용 (클라이언트 번들·git 금지)
-- 안심 링크: `jose` HS256, 운영 시 `PING_SAFE_LINK_SECRET` 필수
-- 관리자: UI PIN과 API 키 분리, 세션 쿠키 `httpOnly` + HMAC 서명
-- 민감 데이터 파기: Vercel Cron `/api/cron/purge-sensitive-data` (설정: `CRON_SECRET`)
-
----
-
-## 라이선스·사업자 정보
-
-**운영 주체:** 한국AIBC융합원 (대표 송지훈)
-
-| 항목 | 내용 |
-|------|------|
-| 사업자등록번호 | 225-09-26000 |
-| 통신판매업신고번호 | 2024울산북구0108호 |
-| 사업장주소 | 울산광역시 중구 해오름5길 24 101호 |
-| 고객센터 | 052-286-4440 |
-
-한국AIBC융합원에서 운영하는 본 사이트의 모든 유료 서비스는 한국AIBC융합원에서 책임지고 제공합니다.
-
-| 구분 | 정책 |
-|------|------|
-| **웹 서비스 이용** | [이용약관](https://ping.funexcloud.com/legal/terms-of-service) · [개인정보처리방침](https://ping.funexcloud.com/legal/privacy-policy) |
-| **소스 코드** | 독점 — [`LICENSE`](./LICENSE). 무단 복제·배포·2차 저작물 금지 |
-| **npm `"private"`** | npm 패키지 미배포 설정 (GitHub 공개 여부와 별개) |
-
-**변호사 검토(필수):** [`docs/legal-attorney-review-checklist.md`](docs/legal-attorney-review-checklist.md) — 약관·개인정보·지식재산 문구는 **법률 자문 후** 확정합니다.
-
-**GitHub About:** Description → [`.github/repository-description.txt`](.github/repository-description.txt)  
-`GITHUB_TOKEN=... node scripts/set-github-repo-description.mjs`
-
-사업자 표기 단일 출처: [`src/lib/ping-company-legal.ts`](src/lib/ping-company-legal.ts)
+| README 등록 가이드 | [funexcloud/funexcloud → `docs/github-readme-setup.md`](https://github.com/funexcloud/funexcloud) |
+| Funex Cloud 배포 | [funexcloud/funexcloud → `docs/deploy-funexcloud-com.md`](https://github.com/funexcloud/funexcloud) |
+| PING 대량 발송 SoT | [funexcloud/ping → `docs/ping-bulk-send-process.md`](https://github.com/funexcloud/ping) |
+| Mainnet·API 설계 | [docs.funexcloud.com/mainnet](https://docs.funexcloud.com/mainnet) |
